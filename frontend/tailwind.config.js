@@ -10,6 +10,7 @@ export default {
         mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
+        border: "var(--border)",
         teal: {
           50: '#f0fdfa',
           100: '#ccfbf1',

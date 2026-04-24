@@ -89,22 +89,34 @@ app.use((req, res) => {
 })
 
 // ─── Database & Server Start ──────────────────────────────────────────────────
+// mongoose
+//   .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/mahatme-eye-hospital')
+//   .then(() => {
+//     console.log('✅ Connected to MongoDB')
+//     app.listen(PORT, () => {
+//       console.log(`🚀 Mahatme Eye Hospital API running on port ${PORT}`)
+//       console.log(`📋 Health check: http://localhost:${PORT}/api/health`)
+//       if (process.env.NODE_ENV !== 'production') {
+//   app.listen(5000, () => console.log('Server running'));
+// }
+//     })
+//   })
+//   .catch((err) => {
+//     console.error('❌ MongoDB connection failed:', err.message)
+//     process.exit(1)
+//   })
+
+// ─── Database & Server Start ──────────────────────────────────────────────────
 mongoose
   .connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/mahatme-eye-hospital')
-  .then(() => {
-    console.log('✅ Connected to MongoDB')
-    app.listen(PORT, () => {
-      console.log(`🚀 Mahatme Eye Hospital API running on port ${PORT}`)
-      console.log(`📋 Health check: http://localhost:${PORT}/api/health`)
-      if (process.env.NODE_ENV !== 'production') {
-  app.listen(5000, () => console.log('Server running'));
-}
-    })
-  })
-  .catch((err) => {
-    console.error('❌ MongoDB connection failed:', err.message)
-    process.exit(1)
-  })
+  .then(() => console.log('✅ Connected to MongoDB'))
+  .catch((err) => console.error('❌ MongoDB connection failed:', err.message))
 
-// At the bottom of server.js, replace app.listen(...) with:
-module.exports = app;
+// For local dev only
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, () => {
+    console.log(`🚀 API running on port ${PORT}`)
+  })
+}
+
+module.exports = app
