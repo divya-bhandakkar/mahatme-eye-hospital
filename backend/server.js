@@ -96,6 +96,9 @@ mongoose
     app.listen(PORT, () => {
       console.log(`🚀 Mahatme Eye Hospital API running on port ${PORT}`)
       console.log(`📋 Health check: http://localhost:${PORT}/api/health`)
+      if (process.env.NODE_ENV !== 'production') {
+  app.listen(5000, () => console.log('Server running'));
+}
     })
   })
   .catch((err) => {
@@ -103,4 +106,5 @@ mongoose
     process.exit(1)
   })
 
-module.exports = app
+// At the bottom of server.js, replace app.listen(...) with:
+module.exports = app;
